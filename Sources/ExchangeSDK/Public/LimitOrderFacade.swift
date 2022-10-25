@@ -2,28 +2,15 @@ import Foundation
 
 public protocol LimitOrderFacade: AnyObject {
     /// Get limit order for specific address
-    /// - Parameters:
-    ///   - blockchain: blockchain type
-    ///   - parameters: parameters for request
-    /// - Returns: result of request
-    func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderModel], ExchangeError>
+    func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderDTO], ExchangeError>
+    
     /// All orders in 1inch
-    /// - Parameters:
-    ///   - blockchain: blockchain type
-    ///   - parameters: parameters for request
-    /// - Returns: result of request
-    func allOrders(blockchain: ExchangeBlockchain, parameters: OrdersAllParameters) async -> Result<[LimitOrderModel], ExchangeError>
+    func allOrders(blockchain: ExchangeBlockchain, parameters: AllOrdersParameters) async -> Result<[LimitOrderDTO], ExchangeError>
+    
     /// Count of all limit orders
-    /// - Parameters:
-    ///   - blockchain: blockchain type
-    ///   - statuses: array of filters [.valid, .temporaryInvalid, .invalid]
-    /// - Returns: result of request
     func countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses]) async -> Result<CountLimitOrdersDTO, ExchangeError>
+    
     /// Get all events
-    /// - Parameters:
-    ///   - blockchain: blockchain type
-    ///   - limit: count of events
-    /// - Returns: result request
     func events(blockchain: ExchangeBlockchain, limit: Int) async -> Result<[EventsLimitOrderDTO], ExchangeError>
     func hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain, walletAddress: String, tokenAddress: String) async -> Result<ActiveOrdersWithPermitDTO, ExchangeError>
 }
@@ -36,10 +23,10 @@ public class LimitOrderService: LimitOrderFacade {
         self.enableDebugMode = enableDebugMode
     }
     
-    public func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderModel], ExchangeError> {
+    public func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderDTO], ExchangeError> {
         await withCheckedContinuation({ continuation in
             Task {
-                let response = await networkFacade.request(with: DexTarget(target: LimitOrderTarget.ordersForAddress(blockchain: blockchain, parameters: parameters)), decodeTo: [LimitOrderModel].self)
+                let response = await networkFacade.request(with: BaseTarget(target: LimitOrderTarget.ordersForAddress(blockchain: blockchain, parameters: parameters)), decodingObject: [LimitOrderDTO].self)
                 
                 switch response {
                 case .success(let decodedResponse):
@@ -51,10 +38,10 @@ public class LimitOrderService: LimitOrderFacade {
         })
     }
     
-    public func allOrders(blockchain: ExchangeBlockchain, parameters: OrdersAllParameters) async -> Result<[LimitOrderModel], ExchangeError> {
+    public func allOrders(blockchain: ExchangeBlockchain, parameters: AllOrdersParameters) async -> Result<[LimitOrderDTO], ExchangeError> {
         await withCheckedContinuation({ continuation in
             Task {
-                let response = await networkFacade.request(with: DexTarget(target: LimitOrderTarget.allOrders(blockchain: blockchain, parameters: parameters)), decodeTo: [LimitOrderModel].self)
+                let response = await networkFacade.request(with: BaseTarget(target: LimitOrderTarget.allOrders(blockchain: blockchain, parameters: parameters)), decodingObject: [LimitOrderDTO].self)
                 
                 switch response {
                 case .success(let decodedResponse):
@@ -69,8 +56,8 @@ public class LimitOrderService: LimitOrderFacade {
     public func countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses]) async -> Result<CountLimitOrdersDTO, ExchangeError> {
         await withCheckedContinuation({ continuation in
             Task {
-                let response = await networkFacade.request(with: DexTarget(target: LimitOrderTarget.countOrders(blockchain: blockchain, statuses: statuses)),
-                                                           decodeTo: CountLimitOrdersDTO.self)
+                let response = await networkFacade.request(with: BaseTarget(target: LimitOrderTarget.countOrders(blockchain: blockchain, statuses: statuses)),
+                                                           decodingObject: CountLimitOrdersDTO.self)
                 
                 switch response {
                 case .success(let decodedResponse):
@@ -85,8 +72,8 @@ public class LimitOrderService: LimitOrderFacade {
     public func events(blockchain: ExchangeBlockchain, limit: Int) async -> Result<[EventsLimitOrderDTO], ExchangeError> {
         await withCheckedContinuation({ continuation in
             Task {
-                let response = await networkFacade.request(with: DexTarget(target: LimitOrderTarget.events(blockchain: blockchain, limit: limit)),
-                                                           decodeTo: [EventsLimitOrderDTO].self)
+                let response = await networkFacade.request(with: BaseTarget(target: LimitOrderTarget.events(blockchain: blockchain, limit: limit)),
+                                                           decodingObject: [EventsLimitOrderDTO].self)
                 
                 switch response {
                 case .success(let decodedResponse):
@@ -103,10 +90,10 @@ public class LimitOrderService: LimitOrderFacade {
                                           tokenAddress: String) async -> Result<ActiveOrdersWithPermitDTO, ExchangeError> {
         await withCheckedContinuation({ continuation in
             Task {
-                let response = await networkFacade.request(with: DexTarget(target: LimitOrderTarget.hasActiveOrdersWithPermit(blockchain: blockchain,
+                let response = await networkFacade.request(with: BaseTarget(target: LimitOrderTarget.hasActiveOrdersWithPermit(blockchain: blockchain,
                                                                                                                               walletAddress: walletAddress,
                                                                                                                               tokenAddress: tokenAddress)),
-                                                           decodeTo: ActiveOrdersWithPermitDTO.self)
+                                                           decodingObject: ActiveOrdersWithPermitDTO.self)
                 
                 switch response {
                 case .success(let decodedResponse):

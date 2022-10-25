@@ -1,50 +1,26 @@
 import Foundation
-import Combine
 import Moya
 
 class NetworkFacade {
     let debugMode: Bool
     
 //    MARK: - Private variable
+    
     private var jsonDecoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
     
-    private let provider = MoyaProvider<DexTarget>()
+    private let provider = MoyaProvider<BaseTarget>()
     
     init(debugMode: Bool) {
         self.debugMode = debugMode
     }
     
 //    MARK: - Internal methods
-    func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) -> AnyPublisher<T, ExchangeError> {
-        Deferred {
-            Future { [weak self] promise in
-                guard let self = self else { return }
-                
-                self.provider.request(target) { result in
-                    switch result {
-                    case .success(let response):
-                        guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
-                            if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
-                                promise(.failure(.parsedError(withInfo: errorResponse)))
-                            } else {
-                                promise(.failure(.unknownError(statusCode: 500)))
-                            }
-                            return
-                        }
-                        promise(.success(object))
-                    case .failure(let error):
-                        promise(.failure(.serverError(withError: error)))
-                    }
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
     
-    func request<T: Decodable>(with target: DexTarget, decodeTo: T.Type) async -> Result<T, ExchangeError> {
+    func request<T: Decodable>(with target: BaseTarget, decodingObject: T.Type) async -> Result<T, ExchangeError> {
         let asyncRequestWrapper = AsyncMoyaRequestWrapper<T> { [weak self] continuation in
             guard let self = self else { return nil }
             
@@ -53,9 +29,9 @@ class NetworkFacade {
                 case .success(let response):
                     if self.debugMode {
                         print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
-                        self.responseDecoding(data: response.data, decodeTo: decodeTo)
+                        self.responseDecoding(data: response.data, decodeTo: decodingObject)
                     }
-                    guard let object = try? self.jsonDecoder.decode(decodeTo, from: response.data) else {
+                    guard let object = try? self.jsonDecoder.decode(decodingObject, from: response.data) else {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
                             continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
                         } else {

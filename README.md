@@ -1,7 +1,5 @@
 # Exchange
 
-1Inch exchange api wrapper with async/await swift.
-
 ```swift
 let exchangeFacade: ExchangeFacade = ExchangeService()
 

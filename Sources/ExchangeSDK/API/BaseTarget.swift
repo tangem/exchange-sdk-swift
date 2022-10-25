@@ -1,7 +1,7 @@
 import Foundation
 import Moya
 
-struct DexTarget: TargetType {
+struct BaseTarget: TargetType {
     let target: TargetType
     
     var baseURL: URL {

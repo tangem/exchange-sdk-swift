@@ -8,9 +8,9 @@ public enum Statuses: Int {
 
 public struct OrdersForAddressParameters {
     public var address: String
-    public var page: Int = 1
-    public var limit: Int = 100
-    public var statuses: [Statuses] = []
+    public var page: Int
+    public var limit: Int
+    public var statuses: [Statuses]
     public var makerAsset: String?
     public var takerAsset: String?
     
@@ -45,7 +45,7 @@ public struct OrdersForAddressParameters {
     }
 }
 
-public struct OrdersAllParameters {    
+public struct AllOrdersParameters {    
     public var page: Int = 1
     public var limit: Int = 100
     public var statuses: [Statuses] = []

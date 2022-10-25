@@ -1,18 +1,17 @@
 import XCTest
-@testable import Exchanger
+@testable import ExchangeSDK
 
 final class ExchangerTests: XCTestCase {
-    let exchange: ExchangeFacade = ExchangeFacadeImpl(enableDebugMode: true)
+    let exchange: ExchangingFacade = ExchangeFacade(enableDebugMode: true)
     
     func testHealth() async {
-        let health = await exchange.healthCheck(blockchain: .BSC)
+        let health = await exchange.healthCheck(blockchain: .bsc)
         switch health {
         case .success(let dto):
             print(dto)
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -27,13 +26,12 @@ final class ExchangerTests: XCTestCase {
             }
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
     func testPresents() async {
-        let presents = await exchange.presents(blockchain: .polygon)
+        let presents = await exchange.presets(blockchain: .polygon)
         
         switch presents {
         case .success(let dto):
@@ -48,8 +46,7 @@ final class ExchangerTests: XCTestCase {
             })
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -64,8 +61,7 @@ final class ExchangerTests: XCTestCase {
             })
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -82,8 +78,7 @@ final class ExchangerTests: XCTestCase {
             print(dto)
             XCTAssert(true)
         case .failure(let error):
-            print(error)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -97,8 +92,7 @@ final class ExchangerTests: XCTestCase {
             print(dto)
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -110,8 +104,7 @@ final class ExchangerTests: XCTestCase {
             print(dto)
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -125,8 +118,7 @@ final class ExchangerTests: XCTestCase {
             print(dto)
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     
@@ -140,8 +132,7 @@ final class ExchangerTests: XCTestCase {
             print(dto)
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
 }

@@ -35,4 +35,11 @@ public struct ApproveAllowanceParameters {
         self.tokenAddress = tokenAddress
         self.walletAddress = walletAddress
     }
+    
+    func parameters() -> [String: Any] {
+        var params: [String: Any] = [:]
+        params["tokenAddress"] = tokenAddress
+        params["walletAddress"] = walletAddress
+        return params
+    }
 }

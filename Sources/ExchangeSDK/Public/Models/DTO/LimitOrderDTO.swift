@@ -2,11 +2,16 @@ import Foundation
 
 /// - limit-order/address/{address}
 /// - limit-order/all
-public struct LimitOrderModel: Codable {
-    public let signature, orderHash, createDateTime, remainingMakerAmount: String
-    public let makerBalance, makerAllowance: String
+public struct LimitOrderDTO: Codable {
+    public let signature: String
+    public let orderHash: String
+    public let createDateTime: String
+    public let remainingMakerAmount: String
+    public let makerAllowance: String
+    public let takerRate: String
+    public let makerBalance : String
     public let data: MetaData
-    public let makerRate, takerRate: String
+    public let makerRate: String
     public let isMakerContract: Bool
     
     public struct MetaData: Codable {
@@ -24,18 +29,30 @@ public struct CountLimitOrdersDTO: Decodable {
 }
 
 public struct EventsLimitOrderDTO: Decodable {
-    public let id, network: Int
+    public let id: Int
+    public let network: Int
     public let logID: String
     public let version: Int
-    public let action, orderHash, taker, remainingMakerAmount: String
+    public let action: String
+    public let orderHash: String
+    public let taker: String
+    public let remainingMakerAmount: String
     public let transactionHash: String
     public let blockNumber: Int
     public let createDateTime: String
     
     enum CodingKeys: String, CodingKey {
-        case id, network
         case logID = "logId"
-        case version, action, orderHash, taker, remainingMakerAmount, transactionHash, blockNumber, createDateTime
+        case id
+        case network
+        case version
+        case createDateTime
+        case blockNumber
+        case transactionHash
+        case action
+        case orderHash
+        case taker
+        case remainingMakerAmount
     }
 }
 

@@ -5,19 +5,22 @@ public struct InfoTokensDTO: Decodable {
 }
 
 // MARK: - Token
+
 public struct TokenDTO: Decodable {
-    public let symbol, name: String
+    public let symbol: String
+    public let name: String
     public let decimals: Int
     public let address: String
     public let logoURI: String
     public let tags: [String]
-    public let eip2612, isFoT: Bool?
+    public let eip2612: Bool?
+    public let isFoT: Bool
     public let domainVersion: String?
     public let synth: Bool?
     public let displayedSymbol: String?
 }
 
-public struct PresentsConfigurationDTO: Decodable {
+public struct PresetsConfigurationDTO: Decodable {
     public let maxResult: [GasDTO]?
     public let lowestGas: [GasDTO]?
 
@@ -28,7 +31,10 @@ public struct PresentsConfigurationDTO: Decodable {
 }
 
 public struct GasDTO: Decodable {
-    public let complexityLevel, mainRouteParts, parts, virtualParts: Int
+    public let complexityLevel: Int
+    public let mainRouteParts: Int
+    public let parts: Int
+    public let virtualParts: Int
 }
 
 public struct LiquiditySourcesDTO: Decodable {
@@ -43,6 +49,8 @@ public struct LiquidityProtocol: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case imgColor = "img_color"
-        case id, title, img
+        case id
+        case img
+        case title
     }
 }

@@ -2,7 +2,7 @@ import Moya
 import Foundation
 
 enum HealthCheckTarget {
-    case healthCheck(blockChain: ExchangeBlockchain)
+    case healthCheck(blockchain: ExchangeBlockchain)
 }
 
 extension HealthCheckTarget: TargetType {
@@ -12,8 +12,8 @@ extension HealthCheckTarget: TargetType {
     
     var path: String {
         switch self {
-        case .healthCheck(let blockChainID):
-            return "/\(blockChainID.id)/healthcheck"
+        case .healthCheck(let exchangeBlockchain):
+            return "/\(exchangeBlockchain.id)/healthcheck"
         }
     }
     

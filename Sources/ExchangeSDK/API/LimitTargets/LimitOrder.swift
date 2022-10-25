@@ -2,11 +2,11 @@ import Foundation
 import Moya
 
 enum LimitOrderTarget {
-//    POST
-    case append(blockchain: ExchangeBlockchain, order: LimitOrderModel)
-//    GET
+    // POST
+    case append(blockchain: ExchangeBlockchain, order: LimitOrderDTO)
+    // GET
     case ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters)
-    case allOrders(blockchain: ExchangeBlockchain, parameters: OrdersAllParameters)
+    case allOrders(blockchain: ExchangeBlockchain, parameters: AllOrdersParameters)
     case countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses])
     case events(blockchain: ExchangeBlockchain, limit: Int)
     case eventsForOrder(blockchain: ExchangeBlockchain, orderHash: String)

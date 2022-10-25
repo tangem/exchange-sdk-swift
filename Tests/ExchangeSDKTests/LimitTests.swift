@@ -1,5 +1,5 @@
 import XCTest
-@testable import Exchanger
+@testable import ExchangeSDK
 
 final class LimitTests: XCTestCase {
     let limit: LimitOrderFacade = LimitOrderService(enableDebugMode: true)
@@ -7,7 +7,7 @@ final class LimitTests: XCTestCase {
     func testLimitForAddress() async {
         let response = await limit.ordersForAddress(blockchain: .polygon, parameters: .init(address: "0x2d45754375672e470E03beF24f4acC3cCD36973c"))
         
-        let params = OrdersAllParameters.init(statuses: [.invalid, .temporaryInvalid])
+        let params = AllOrdersParameters.init(statuses: [.invalid, .temporaryInvalid])
         print(params.parameters())
         switch response {
         case .success(let objects):
@@ -16,8 +16,7 @@ final class LimitTests: XCTestCase {
             }
             XCTAssert(true)
         case .failure(let error):
-            print(error.localizedDescription)
-            XCTAssert(false)
+            XCTAssert(false, error.localizedDescription)
         }
     }
     

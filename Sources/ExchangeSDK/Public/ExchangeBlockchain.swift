@@ -2,11 +2,11 @@ import Foundation
 
 public enum ExchangeBlockchain {
     case ethereum
-    case BSC
+    case bsc
     case polygon
     case optimism
     case arbitrum
-    case gnosisChain
+    case gnosis
     case avalanche
     case fantom
     case klayth
@@ -16,7 +16,7 @@ public enum ExchangeBlockchain {
         switch self {
         case .ethereum:
             return "1"
-        case .BSC:
+        case .bsc:
             return "56"
         case .polygon:
             return "137"
@@ -24,7 +24,7 @@ public enum ExchangeBlockchain {
             return "10"
         case .arbitrum:
             return "42161"
-        case .gnosisChain:
+        case .gnosis:
             return "100"
         case .avalanche:
             return "43114"

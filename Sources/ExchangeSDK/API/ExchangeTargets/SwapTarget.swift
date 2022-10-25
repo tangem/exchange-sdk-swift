@@ -2,9 +2,9 @@ import Foundation
 import Moya
 
 enum SwapTarget {
-    //find the best quote to exchange via 1inch router
+    // find the best quote to exchange via 1inch router
     case quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters)
-    //generate data for calling the 1inch router for exchange
+    // generate data for calling the 1inch router for exchange
     case swap(blockchain: ExchangeBlockchain, parameters: SwapParameters)
 }
 
@@ -26,10 +26,10 @@ extension SwapTarget: TargetType {
     
     var task: Task {
         switch self {
-        case let .quote(_, parametersModel):
-            return .requestParameters(parameters: parametersModel.parameters(), encoding: URLEncoding())
-        case let .swap(_, parametersModel):
-            return .requestParameters(parameters: parametersModel.parameters(), encoding: URLEncoding())
+        case let .quote(_, parameters):
+            return .requestParameters(parameters: parameters.parameters(), encoding: URLEncoding())
+        case let .swap(_, parameters):
+            return .requestParameters(parameters: parameters.parameters(), encoding: URLEncoding())
         }
     }
     

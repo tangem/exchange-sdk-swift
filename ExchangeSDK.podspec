@@ -7,9 +7,8 @@ Pod::Spec.new do |s|
     s.license = { :type => "MIT", :file => "LICENSE" }
     s.ios.deployment_target = "13.0"
     s.source = { :git => 'https://github.com/tangem/Exchanger.git', :tag => '1.0.8' }
-    s.author = "Pavel"
+    s.author = "Tangem AG"
     s.source_files = "Sources/Exchanger/**/*.swift"
     s.swift_version = "5.0"
-    s.frameworks = "Combine"
     s.dependency 'Moya', '~> 15.0.0'
 end

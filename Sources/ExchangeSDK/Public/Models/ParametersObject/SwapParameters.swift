@@ -40,7 +40,7 @@ public struct QuoteParameters {
         var params: [String: Any] = [
             "fromTokenAddress": fromTokenAddress,
             "toTokenAddress": toTokenAddress,
-            "amount": amount
+            "amount": amount,
         ]
         
         if let gasLimit = gasLimit {
