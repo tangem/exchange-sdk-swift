@@ -42,7 +42,7 @@ Temporary Items
 ## User settings
 xcuserdata/
 ExchangerExample/ExchangerExample.xcworkspace/xcshareddata/
-ExchangerExample/Pods/*
+ExchangerExample/Pods
 *.xcworkspacedata
 
 
