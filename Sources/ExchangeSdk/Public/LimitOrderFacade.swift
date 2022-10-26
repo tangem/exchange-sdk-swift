@@ -27,8 +27,8 @@ public class LimitOrderService: LimitOrderFacade {
     let debugMode: Bool
     private lazy var networkFacade: NetworkFacade = NetworkFacade(debugMode: debugMode)
     
-    init(enableDebugMode: Bool) {
-        self.debugMode = enableDebugMode
+    init(debugMode: Bool) {
+        self.debugMode = debugMode
     }
     
     public func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrderDTO], ExchangeError> {

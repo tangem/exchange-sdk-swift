@@ -22,7 +22,7 @@ public struct TokenDTO: Decodable {
     public let logoURI: String
     public let tags: [String]
     public let eip2612: Bool?
-    public let isFoT: Bool
+    public let isFoT: Bool?
     public let domainVersion: String?
     public let synth: Bool?
     public let displayedSymbol: String?
