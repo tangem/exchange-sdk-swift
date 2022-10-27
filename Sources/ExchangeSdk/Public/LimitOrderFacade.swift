@@ -13,7 +13,7 @@ public protocol LimitOrderFacade: AnyObject {
     func allOrders(blockchain: ExchangeBlockchain, parameters: AllOrdersParameters) async -> Result<[LimitOrderDTO], ExchangeError>
     func countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses]) async -> Result<CountLimitOrdersDTO, ExchangeError>
     func events(blockchain: ExchangeBlockchain, limit: Int) async -> Result<[EventsLimitOrderDTO], ExchangeError>
-    func hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain, walletAddress: String, tokenAddress: String) async -> Result<ActiveOrdersWithPermitDTO, ExchangeError>
+    func hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain, walletAddress: String, tokenAddress: String) async -> Result<Bool, ExchangeError>
 }
 
 public class LimitOrderService: LimitOrderFacade {
@@ -45,11 +45,18 @@ public class LimitOrderService: LimitOrderFacade {
     
     public func hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain,
                                           walletAddress: String,
-                                          tokenAddress: String) async -> Result<ActiveOrdersWithPermitDTO, ExchangeError> {
+                                          tokenAddress: String) async -> Result<Bool, ExchangeError> {
         let target = LimitOrderTarget.hasActiveOrdersWithPermit(blockchain: blockchain,
                                                                 walletAddress: walletAddress,
                                                                 tokenAddress: tokenAddress)
-        return await networkFacade.request(with: BaseTarget(target: target),
+        
+        let response = await networkFacade.request(with: BaseTarget(target: target),
                                             decodingObject: ActiveOrdersWithPermitDTO.self)
+        switch response {
+        case .success(let dto):
+            return .success(dto.result)
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 }

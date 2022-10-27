@@ -76,6 +76,6 @@ public struct EventsLimitOrderDTO: Decodable {
     }
 }
 
-public struct ActiveOrdersWithPermitDTO: Decodable {
-    public let result: Bool
+internal struct ActiveOrdersWithPermitDTO: Decodable {
+    internal let result: Bool
 }
