@@ -25,10 +25,22 @@ public struct LimitOrderDTO: Codable {
     public struct MetaData: Codable {
         /// maker asset -> "you sell"
         /// taker asset -> "you buy"
-        public let makerAsset, takerAsset, getMakerAmount, getTakerAmount: String
-        public let makerAssetData, takerAssetData, salt, permit: String
-        public let predicate, interaction, receiver, allowedSender: String
-        public let makingAmount, takingAmount, maker: String
+
+        public let makerAsset: String
+        public let getMakerAmount: String
+        public let getTakerAmount: String
+        public let takerAsset: String
+        public let makerAssetData: String
+        public let takerAssetData: String
+        public let salt: String
+        public let permit: String
+        public let predicate: String
+        public let allowedSender: String
+        public let receiver: String
+        public let interaction: String
+        public let makingAmount: String
+        public let maker: String
+        public let takingAmount: String
     }
 }
 

@@ -30,10 +30,10 @@ final class ExchangerTests: XCTestCase {
         }
     }
     
-    func testPresents() async {
-        let presents = await exchange.presets(blockchain: .polygon)
+    func testPresets() async {
+        let presets = await exchange.presets(blockchain: .polygon)
         
-        switch presents {
+        switch presets {
         case .success(let dto):
             dto.lowestGas?.forEach({
                 print($0)
