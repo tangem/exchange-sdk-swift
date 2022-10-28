@@ -43,7 +43,7 @@ class NetworkFacade {
                         if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
                             continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
                         } else {
-                            continuation.resume(returning: .failure(.unknownError(statusCode: 500)))
+                            continuation.resume(returning: .failure(.unknownError(statusCode: response.statusCode)))
                         }
                         return
                     }
