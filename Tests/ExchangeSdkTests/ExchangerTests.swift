@@ -16,8 +16,7 @@ final class ExchangerTests: XCTestCase {
         let health = await exchange.healthCheck(blockchain: .bsc)
         switch health {
         case .success(let dto):
-            print(dto)
-            XCTAssert(true)
+            XCTAssert(dto.status.contains("OK"))
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -28,11 +27,7 @@ final class ExchangerTests: XCTestCase {
         
         switch tokens {
         case .success(let dto):
-            dto.tokens.forEach {
-                print($0.value)
-                print("")
-            }
-            XCTAssert(true)
+            XCTAssert(!dto.tokens.isEmpty)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -42,16 +37,7 @@ final class ExchangerTests: XCTestCase {
         let presets = await exchange.presets(blockchain: .polygon)
         
         switch presets {
-        case .success(let dto):
-            dto.lowestGas?.forEach({
-                print($0)
-                print("")
-            })
-            
-            dto.maxResult?.forEach({
-                print($0)
-                print("")
-            })
+        case .success:
             XCTAssert(true)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
@@ -62,11 +48,22 @@ final class ExchangerTests: XCTestCase {
         let liq = await exchange.liquiditySources(blockchain: .ethereum)
         
         switch liq {
-        case .success(let dto):
-            dto.protocols.forEach({
-                print($0)
-                print("")
-            })
+        case .success:
+            XCTAssert(true)
+        case .failure(let error):
+            XCTAssert(false, error.localizedDescription)
+        }
+    }
+    
+    func testQuote() async {
+        let parameters = QuoteParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                         toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+                                         amount: "10000000000000000")
+        
+        let response = await exchange.quote(blockchain: .polygon,
+                                            parameters: parameters)
+        switch response {
+        case .success:
             XCTAssert(true)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
@@ -75,42 +72,29 @@ final class ExchangerTests: XCTestCase {
     
     func testGeneratingSwap() async {
         let amount = 100_000_000_000_000_000
+        let parameters = SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+                                        amount: "\(amount)",
+                                        fromAddress: "0x2d45754375672e470E03beF24f4acC3cCD36973c",
+                                        slippage: 1)
+        
         let response = await exchange.swap(blockchain: .polygon,
-                                           parameters: SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-                                                                      toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
-                                                                      amount: "\(amount)",
-                                                                      fromAddress: "0x2d45754375672e470E03beF24f4acC3cCD36973c",
-                                                                      slippage: 1))
+                                           parameters: parameters)
         switch response {
         case .success(let dto):
-            print(dto)
-            XCTAssert(true)
-        case .failure(let error):
-            XCTAssert(false, error.localizedDescription)
-        }
-    }
-    
-    func testQuote() async {
-        let response = await exchange.quote(blockchain: .polygon,
-                                            parameters: QuoteParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-                                                                        toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
-                                                                        amount: "10000000000000000"))
-        switch response {
-        case .success(let dto):
-            print(dto)
-            XCTAssert(true)
+            XCTAssert(!dto.tx.data.isEmpty)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
     }
     
     func testApproveSpender() async {
-        let response = await exchange.spender(blockchain: .polygon)
+        let spenderAddress = "0x1111111254fb6c44bac0bed2854e76f90643097d"
+        let response = await exchange.spender(blockchain: .ethereum)
         
         switch response {
         case .success(let dto):
-            print(dto)
-            XCTAssert(true)
+            XCTAssert(dto.address == spenderAddress)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -123,8 +107,7 @@ final class ExchangerTests: XCTestCase {
         
         switch response {
         case .success(let dto):
-            print(dto)
-            XCTAssert(true)
+            XCTAssert(!dto.data.isEmpty)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -137,8 +120,8 @@ final class ExchangerTests: XCTestCase {
         
         switch response {
         case .success(let dto):
-            print(dto)
-            XCTAssert(true)
+            let decimalAllowance = Decimal(string: dto.allowance) ?? 0
+            XCTAssert(decimalAllowance > 0)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }

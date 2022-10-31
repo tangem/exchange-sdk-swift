@@ -1,7 +1,9 @@
 # Exchange
 
+Network layer for 1inch router.
+
 ```swift
-let exchangeFacade: ExchangeFacade = ExchangeService()
+let exchangeFacade: ExchangeServiceProtocol = ExchangeSdk.buildInchExchangeService(debugMode: true)
 
 // Get tokens info
 Task { 
@@ -31,7 +33,7 @@ Task {
                                                                   slippage: 1))
     switch response {
     case .success(let dto):
-        print(dto.tx.data) // Data for sign and push to blockchain
+        print(dto.tx.data) // Data for send to blockchain
     case .failure(let error):
         print(error)
     }

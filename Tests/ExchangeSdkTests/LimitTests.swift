@@ -19,10 +19,7 @@ final class LimitTests: XCTestCase {
         
         switch response {
         case .success(let objects):
-            for object in objects {
-                print(object)
-            }
-            XCTAssert(true)
+            XCTAssert(objects.count == 0)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -33,10 +30,7 @@ final class LimitTests: XCTestCase {
         
         switch response {
         case .success(let objects):
-            for object in objects {
-                print(object)
-            }
-            XCTAssert(true)
+            XCTAssert(objects.count != 0)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -46,8 +40,7 @@ final class LimitTests: XCTestCase {
         let response = await limit.countOrders(blockchain: .polygon, statuses: [.valid, .temporaryInvalid])
         switch response {
         case .success(let object):
-            print(object.count)
-            XCTAssert(true)
+            XCTAssert(object.count > 0)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -57,8 +50,7 @@ final class LimitTests: XCTestCase {
         let response = await limit.events(blockchain: .polygon, limit: 100)
         switch response {
         case .success(let object):
-            print(object)
-            XCTAssert(true)
+            XCTAssert(object.count > 0)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }
@@ -70,8 +62,7 @@ final class LimitTests: XCTestCase {
                                                              tokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063")
         switch response {
         case .success(let object):
-            print(object)
-            XCTAssert(true)
+            XCTAssert(!object)
         case .failure(let error):
             XCTAssert(false, error.localizedDescription)
         }

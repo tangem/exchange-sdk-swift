@@ -25,22 +25,19 @@ class LimitOrderService: LimitOrderServiceProtocol {
     }
     
     func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrder], ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: LimitOrderTarget.ordersForAddress(blockchain: blockchain, parameters: parameters)), decodingObject: [LimitOrder].self)
-        
+        await networkService.request(with: BaseTarget(target: LimitOrderTarget.ordersForAddress(blockchain: blockchain, parameters: parameters)))
     }
     
     func allOrders(blockchain: ExchangeBlockchain, parameters: AllOrdersParameters) async -> Result<[LimitOrder], ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: LimitOrderTarget.allOrders(blockchain: blockchain, parameters: parameters)), decodingObject: [LimitOrder].self)
+        await networkService.request(with: BaseTarget(target: LimitOrderTarget.allOrders(blockchain: blockchain, parameters: parameters)))
     }
     
     func countOrders(blockchain: ExchangeBlockchain, statuses: [ExchangeOrderStatus]) async -> Result<CountLimitOrders, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: LimitOrderTarget.countOrders(blockchain: blockchain, statuses: statuses)),
-                                           decodingObject: CountLimitOrders.self)
+        await networkService.request(with: BaseTarget(target: LimitOrderTarget.countOrders(blockchain: blockchain, statuses: statuses)))
     }
     
     func events(blockchain: ExchangeBlockchain, limit: Int) async -> Result<[EventsLimitOrder], ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: LimitOrderTarget.events(blockchain: blockchain, limit: limit)),
-                                            decodingObject: [EventsLimitOrder].self)
+        await networkService.request(with: BaseTarget(target: LimitOrderTarget.events(blockchain: blockchain, limit: limit)))
     }
     
     func hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain,
@@ -50,8 +47,7 @@ class LimitOrderService: LimitOrderServiceProtocol {
                                                                 walletAddress: walletAddress,
                                                                 tokenAddress: tokenAddress)
         
-        let response = await networkService.request(with: BaseTarget(target: target),
-                                            decodingObject: ActiveOrdersWithPermitDTO.self)
+        let response: Result<ActiveOrdersWithPermitDTO, ExchangeInchError> = await networkService.request(with: BaseTarget(target: target))
         switch response {
         case .success(let dto):
             return .success(dto.result)

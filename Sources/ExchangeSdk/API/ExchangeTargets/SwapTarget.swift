@@ -9,6 +9,7 @@
 import Foundation
 import Moya
 
+/// Target for finding best quote to exchange and getting data for swap transaction
 enum SwapTarget {
     /// find the best quote to exchange via 1inch router
     case quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters)

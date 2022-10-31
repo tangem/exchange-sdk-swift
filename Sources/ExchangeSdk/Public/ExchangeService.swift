@@ -45,47 +45,38 @@ class ExchangeService: ExchangeServiceProtocol {
     }
     
     func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheck, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: HealthCheckTarget.healthCheck(blockchain: blockchain)),
-                                                   decodingObject: HealthCheck.self)
+        await networkService.request(with: BaseTarget(target: HealthCheckTarget.healthCheck(blockchain: blockchain)))
     }
     
     func tokens(blockchain: ExchangeBlockchain) async -> Result<TokensList, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: InfoTarget.tokens(blockchain: blockchain)),
-                                                   decodingObject: TokensList.self)
+        await networkService.request(with: BaseTarget(target: InfoTarget.tokens(blockchain: blockchain)))
     }
     
     func presets(blockchain: ExchangeBlockchain) async -> Result<PresetsConfiguration, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: InfoTarget.presets(blockchain: blockchain)),
-                                                   decodingObject: PresetsConfiguration.self)
+        await networkService.request(with: BaseTarget(target: InfoTarget.presets(blockchain: blockchain)))
     }
     
     func liquiditySources(blockchain: ExchangeBlockchain) async -> Result<LiquiditySourcesList, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: InfoTarget.liquiditySources(blockchain: blockchain)),
-                                                   decodingObject: LiquiditySourcesList.self)
+        await networkService.request(with: BaseTarget(target: InfoTarget.liquiditySources(blockchain: blockchain)))
     }
     
     func quote(blockchain: ExchangeBlockchain, parameters: QuoteParameters) async -> Result<QuoteData, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: SwapTarget.quote(blockchain: blockchain, parameters: parameters)),
-                                                   decodingObject: QuoteData.self)
+        await networkService.request(with: BaseTarget(target: SwapTarget.quote(blockchain: blockchain, parameters: parameters)))
     }
     
     func swap(blockchain: ExchangeBlockchain, parameters: SwapParameters) async -> Result<SwapData, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: SwapTarget.swap(blockchain: blockchain, parameters: parameters)),
-                                                   decodingObject: SwapData.self)
+        await networkService.request(with: BaseTarget(target: SwapTarget.swap(blockchain: blockchain, parameters: parameters)))
     }
     
     func spender(blockchain: ExchangeBlockchain) async -> Result<ApproveSpender, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: ApproveTarget.spender(blockchain: blockchain)),
-                                                   decodingObject: ApproveSpender.self)
+        await networkService.request(with: BaseTarget(target: ApproveTarget.spender(blockchain: blockchain)))
     }
     
     func approveTransaction(blockchain: ExchangeBlockchain, approveTransactionParameters: ApproveTransactionParameters) async -> Result<ApprovedTransactionData, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: ApproveTarget.transaction(blockchain: blockchain, params: approveTransactionParameters)),
-                                                   decodingObject: ApprovedTransactionData.self)
+        await networkService.request(with: BaseTarget(target: ApproveTarget.transaction(blockchain: blockchain, params: approveTransactionParameters)))
     }
     
     func allowance(blockchain: ExchangeBlockchain, allowanceParameters: ApproveAllowanceParameters) async -> Result<ApprovedAllowance, ExchangeInchError> {
-        return await networkService.request(with: BaseTarget(target: ApproveTarget.allowance(blockchain: blockchain, params: allowanceParameters)),
-                                                   decodingObject: ApprovedAllowance.self)
+        await networkService.request(with: BaseTarget(target: ApproveTarget.allowance(blockchain: blockchain, params: allowanceParameters)))
     }
 }

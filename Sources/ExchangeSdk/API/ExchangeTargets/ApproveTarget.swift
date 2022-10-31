@@ -9,6 +9,7 @@
 import Foundation
 import Moya
 
+/// Target for getting the address of the 1inch router, getting data for sending permission and getting the set limit for a specific token in the 1inch system
 enum ApproveTarget {
     case spender(blockchain: ExchangeBlockchain)
     case transaction(blockchain: ExchangeBlockchain, params: ApproveTransactionParameters)

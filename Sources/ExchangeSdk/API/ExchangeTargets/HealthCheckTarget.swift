@@ -9,6 +9,7 @@
 import Moya
 import Foundation
 
+/// Check 1inch service status
 enum HealthCheckTarget {
     case healthCheck(blockchain: ExchangeBlockchain)
 }

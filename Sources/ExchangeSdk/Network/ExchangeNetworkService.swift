@@ -28,13 +28,7 @@ class NetworkService {
     
     // MARK: - Internal methods
     
-    func req<T: Decodable>(with target: BaseTarget) async -> Result<T, ExchangeInchError> {
-        return await withCheckedContinuation({ _ in
-            
-        })
-    }
-    
-    func request<T: Decodable>(with target: BaseTarget, decodingObject: T.Type) async -> Result<T, ExchangeInchError> {
+    func request<T: Decodable>(with target: BaseTarget) async -> Result<T, ExchangeInchError> {
         let asyncRequestWrapper = AsyncMoyaRequestWrapper<T> { [weak self] continuation in
             guard let self = self else { return nil }
             
@@ -43,7 +37,7 @@ class NetworkService {
                 case .success(let response):
                     if self.debugMode {
                         print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
-                        self.responseDecoding(data: response.data, decodeTo: decodingObject)
+                        self.responseDecoding(data: response.data, decodeTo: T.self)
                     }
                     
                     if let response = try? response.filterSuccessfulStatusCodes() {

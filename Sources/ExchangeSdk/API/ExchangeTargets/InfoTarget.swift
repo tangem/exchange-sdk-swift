@@ -9,6 +9,7 @@
 import Foundation
 import Moya
 
+/// Target for getting the list of sources for exchange, getting list of available tokens and getting gas presets
 enum InfoTarget {
     case liquiditySources(blockchain: ExchangeBlockchain)
     /// List of tokens that are available for swap
