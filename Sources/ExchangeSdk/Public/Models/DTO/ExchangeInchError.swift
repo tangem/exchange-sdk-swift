@@ -8,13 +8,14 @@
 
 import Foundation
 
-public enum ExchangeError: Error {
+public enum ExchangeInchError: Error {
     case unknownError(statusCode: Int?)
     case serverError(withError: Error)
-    case parsedError(withInfo: ErrorDTO)
+    case parsedError(withInfo: InchError)
+    case decodeError(error: Error)
 }
 
-public struct ErrorDTO: Decodable, Error {
+public struct InchError: Decodable, Error {
     public let statusCode: Int
     public let error: String
     public let description: String
@@ -36,7 +37,7 @@ public struct ErrorDTO: Decodable, Error {
         error: String = "",
         description: String = "",
         requestId: String = "",
-        meta: ErrorDTO.Meta = .init()
+        meta: InchError.Meta = .init()
     ) {
         self.statusCode = statusCode
         self.error = error

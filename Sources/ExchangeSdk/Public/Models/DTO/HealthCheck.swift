@@ -8,6 +8,6 @@
 
 import Foundation
 
-public struct HealthCheckDTO: Decodable {
+public struct HealthCheck: Decodable {
     public let status: String
 }

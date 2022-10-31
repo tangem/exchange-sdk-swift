@@ -9,15 +9,15 @@
 import Foundation
 import Moya
 
-enum InchApprove {
+enum ApproveTarget {
     case spender(blockchain: ExchangeBlockchain)
     case transaction(blockchain: ExchangeBlockchain, params: ApproveTransactionParameters)
     case allowance(blockchain: ExchangeBlockchain, params: ApproveAllowanceParameters)
 }
 
-extension InchApprove: TargetType {
+extension ApproveTarget: TargetType {
     var baseURL: URL {
-        ExchangeConstants.exchangeAPIBaseURL
+        Constants.exchangeAPIBaseURL
     }
     
     var path: String {

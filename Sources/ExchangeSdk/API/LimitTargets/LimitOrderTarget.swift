@@ -1,5 +1,5 @@
 //
-//  LimitOrder.swift
+//  LimitOrderTarget.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin.
@@ -11,11 +11,11 @@ import Moya
 
 enum LimitOrderTarget {
     // POST
-    case append(blockchain: ExchangeBlockchain, order: LimitOrderDTO)
+    case append(blockchain: ExchangeBlockchain, order: LimitOrder)
     // GET
     case ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters)
     case allOrders(blockchain: ExchangeBlockchain, parameters: AllOrdersParameters)
-    case countOrders(blockchain: ExchangeBlockchain, statuses: [Statuses])
+    case countOrders(blockchain: ExchangeBlockchain, statuses: [ExchangeOrderStatus])
     case events(blockchain: ExchangeBlockchain, limit: Int)
     case eventsForOrder(blockchain: ExchangeBlockchain, orderHash: String)
     case hasActiveOrdersWithPermit(blockchain: ExchangeBlockchain, walletAddress: String, tokenAddress: String)
@@ -23,7 +23,7 @@ enum LimitOrderTarget {
 
 extension LimitOrderTarget: TargetType {
     var baseURL: URL {
-        ExchangeConstants.limitAPIBaseURL
+        Constants.limitAPIBaseURL
     }
     
     var path: String {

@@ -10,16 +10,16 @@ import Foundation
 
 // MARK: - Quote
 
-public struct QuoteDTO: Decodable {
-    public let fromToken: TokenInfoDTO
-    public let toToken: TokenInfoDTO
+public struct QuoteData: Decodable {
+    public let fromToken: TokenInfo
+    public let toToken: TokenInfo
     public let toTokenAmount: String
     public let fromTokenAmount: String
-    public let protocols: [[[ProtocolElementDTO]]]
+    public let protocols: [[[ProtocolInfo]]]
     public let estimatedGas: Int
 }
 
-public struct TokenInfoDTO: Decodable {
+public struct TokenInfo: Decodable {
     public let symbol: String
     public let name: String
     public let address: String
@@ -27,7 +27,7 @@ public struct TokenInfoDTO: Decodable {
     public let logoURI: String
 }
 
-public struct ProtocolElementDTO: Decodable {
+public struct ProtocolInfo: Decodable {
     public let name: String
     public let part: Int
     public let fromTokenAddress: String
@@ -36,16 +36,16 @@ public struct ProtocolElementDTO: Decodable {
 
 // MARK: - Swap
 
-public struct SwapDTO: Decodable {
-    public let fromToken: SwapTokenDTO
-    public let toToken: SwapTokenDTO
+public struct SwapData: Decodable {
+    public let fromToken: SwapTokenData
+    public let toToken: SwapTokenData
     public let toTokenAmount: String
     public let fromTokenAmount: String
-    public let protocols: [[[ProtocolElementDTO]]]
-    public let tx: TransactionDTO
+    public let protocols: [[[ProtocolInfo]]]
+    public let tx: TransactionData
 }
 
-public struct SwapTokenDTO: Decodable {
+public struct SwapTokenData: Decodable {
     public let symbol: String
     public let name: String
     public let decimals: Int
@@ -54,7 +54,7 @@ public struct SwapTokenDTO: Decodable {
     public let tags: [String]
 }
 
-public struct TransactionDTO: Codable {
+public struct TransactionData: Codable {
     public let from: String
     public let to: String
     public let data: String

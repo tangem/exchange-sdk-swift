@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-class NetworkFacade {
+class NetworkService {
     let debugMode: Bool
     
     // MARK: - Private variable
@@ -28,7 +28,13 @@ class NetworkFacade {
     
     // MARK: - Internal methods
     
-    func request<T: Decodable>(with target: BaseTarget, decodingObject: T.Type) async -> Result<T, ExchangeError> {
+    func req<T: Decodable>(with target: BaseTarget) async -> Result<T, ExchangeInchError> {
+        return await withCheckedContinuation({ _ in
+            
+        })
+    }
+    
+    func request<T: Decodable>(with target: BaseTarget, decodingObject: T.Type) async -> Result<T, ExchangeInchError> {
         let asyncRequestWrapper = AsyncMoyaRequestWrapper<T> { [weak self] continuation in
             guard let self = self else { return nil }
             
@@ -39,16 +45,22 @@ class NetworkFacade {
                         print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
                         self.responseDecoding(data: response.data, decodeTo: decodingObject)
                     }
-                    guard let object = try? self.jsonDecoder.decode(decodingObject, from: response.data) else {
-                        if let errorResponse = try? self.jsonDecoder.decode(ErrorDTO.self, from: response.data) {
-                            continuation.resume(returning: .failure(.parsedError(withInfo: errorResponse)))
-                        } else {
+                    
+                    if let response = try? response.filterSuccessfulStatusCodes() {
+                        do {
+                            let object = try self.jsonDecoder.decode(T.self, from: response.data)
+                            continuation.resume(returning: .success(object))
+                        } catch {
+                            continuation.resume(returning: .failure(.decodeError(error: error)))
+                        }
+                    } else {
+                        do {
+                            let errorObject = try self.jsonDecoder.decode(InchError.self, from: response.data)
+                            continuation.resume(returning: .failure(.parsedError(withInfo: errorObject)))
+                        } catch {
                             continuation.resume(returning: .failure(.unknownError(statusCode: response.statusCode)))
                         }
-                        return
                     }
-                    
-                    continuation.resume(returning: .success(object))
                 case .failure(let error):
                     if self.debugMode {
                         print("URL REQUEST -> \(error.response?.request?.url?.absoluteString ?? "")")
@@ -66,6 +78,8 @@ class NetworkFacade {
             })
         })
     }
+    
+    // MARK: - Private
     
     private func responseDecoding<T: Decodable>(data: Data, decodeTo: T.Type) {
         do {

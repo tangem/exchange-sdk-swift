@@ -7,5 +7,11 @@
 //
 
 public struct ExchangeSdk {
-    public static let version = "1.0.0"
+    static func buildInchExchangeService(debugMode: Bool) -> ExchangeServiceProtocol {
+        return ExchangeService(debugMode: debugMode)
+    }
+    
+    static func buildInchLimitService(debugMode: Bool) -> LimitOrderServiceProtocol {
+        return LimitOrderService(debugMode: debugMode)
+    }
 }

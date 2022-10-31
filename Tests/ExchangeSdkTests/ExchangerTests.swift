@@ -10,7 +10,7 @@ import XCTest
 @testable import ExchangeSdk
 
 final class ExchangerTests: XCTestCase {
-    let exchange: ExchangingFacade = ExchangeFacade(debugMode: true)
+    let exchange: ExchangeServiceProtocol = ExchangeSdk.buildInchExchangeService(debugMode: true)
     
     func testHealth() async {
         let health = await exchange.healthCheck(blockchain: .bsc)
@@ -74,7 +74,7 @@ final class ExchangerTests: XCTestCase {
     }
     
     func testGeneratingSwap() async {
-        let amount = 300_000_000_000_000_000
+        let amount = 100_000_000_000_000_000
         let response = await exchange.swap(blockchain: .polygon,
                                            parameters: SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                                                                       toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",

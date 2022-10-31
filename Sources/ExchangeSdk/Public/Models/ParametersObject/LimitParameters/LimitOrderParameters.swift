@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Statuses: Int {
+public enum ExchangeOrderStatus: Int {
     case valid = 1
     case temporaryInvalid = 2
     case invalid = 3
@@ -18,7 +18,7 @@ public struct OrdersForAddressParameters {
     public var address: String
     public var page: Int
     public var limit: Int
-    public var statuses: [Statuses]
+    public var statuses: [ExchangeOrderStatus]
     public var makerAsset: String?
     public var takerAsset: String?
     
@@ -26,7 +26,7 @@ public struct OrdersForAddressParameters {
         address: String,
         page: Int = 1,
         limit: Int = 100,
-        statuses: [Statuses] = [],
+        statuses: [ExchangeOrderStatus] = [],
         makerAsset: String? = nil,
         takerAsset: String? = nil
     ) {
@@ -56,14 +56,14 @@ public struct OrdersForAddressParameters {
 public struct AllOrdersParameters {    
     public var page: Int
     public var limit: Int
-    public var statuses: [Statuses]
+    public var statuses: [ExchangeOrderStatus]
     public var makerAsset: String?
     public var takerAsset: String?
     
     public init(
         page: Int = 1,
         limit: Int = 100,
-        statuses: [Statuses] = [],
+        statuses: [ExchangeOrderStatus] = [],
         makerAsset: String? = nil,
         takerAsset: String? = nil
     ) {

@@ -8,11 +8,9 @@
 
 import Foundation
 
-struct ExchangeConstants {
-    enum APIVersion: String {
-        case v1 = "v1.0"
+enum Constants {
+    private enum APIVersion: String {
         case v2 = "v2.0"
-        case v3 = "v3.0"
         case v4 = "v4.0"
     }
     

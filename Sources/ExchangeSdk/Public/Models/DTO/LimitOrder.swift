@@ -10,7 +10,7 @@ import Foundation
 
 /// - limit-order/address/{address}
 /// - limit-order/all
-public struct LimitOrderDTO: Codable {
+public struct LimitOrder: Codable {
     public let signature: String
     public let orderHash: String
     public let createDateTime: String
@@ -44,14 +44,14 @@ public struct LimitOrderDTO: Codable {
     }
 }
 
-public struct CountLimitOrdersDTO: Decodable {
+public struct CountLimitOrders: Decodable {
     public let count: Int
 }
 
-public struct EventsLimitOrderDTO: Decodable {
+public struct EventsLimitOrder: Decodable {
     public let id: Int
     public let network: Int
-    public let logID: String
+    public let logId: String
     public let version: Int
     public let action: String
     public let orderHash: String
@@ -60,20 +60,6 @@ public struct EventsLimitOrderDTO: Decodable {
     public let transactionHash: String
     public let blockNumber: Int
     public let createDateTime: String
-    
-    enum CodingKeys: String, CodingKey {
-        case logID = "logId"
-        case id
-        case network
-        case version
-        case createDateTime
-        case blockNumber
-        case transactionHash
-        case action
-        case orderHash
-        case taker
-        case remainingMakerAmount
-    }
 }
 
 internal struct ActiveOrdersWithPermitDTO: Decodable {

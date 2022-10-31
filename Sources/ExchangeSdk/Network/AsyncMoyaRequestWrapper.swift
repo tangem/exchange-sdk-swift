@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 class AsyncMoyaRequestWrapper<T: Decodable> {
-    typealias MoyaContinuation = CheckedContinuation<Result<T, ExchangeError>, Never>
+    typealias MoyaContinuation = CheckedContinuation<Result<T, ExchangeInchError>, Never>
 
     var performRequest: (MoyaContinuation) -> Moya.Cancellable?
     var cancellable: Moya.Cancellable?
