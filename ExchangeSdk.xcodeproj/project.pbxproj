@@ -155,13 +155,13 @@
 		B0335BD5290F8F3900F33BAF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B041EB42291127D400E91A84 /* ExchangeSDK */,
+				B041EB42291127D400E91A84 /* ExchangeSdk */,
 				B0335C0E290F8F7600F33BAF /* ExchangeSdk.h */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		B041EB42291127D400E91A84 /* ExchangeSDK */ = {
+		B041EB42291127D400E91A84 /* ExchangeSdk */ = {
 			isa = PBXGroup;
 			children = (
 				B041EB43291127D400E91A84 /* ExchangeSdk.swift */,
@@ -169,7 +169,7 @@
 				B041EB47291127D400E91A84 /* Public */,
 				B041EB5D291127D400E91A84 /* API */,
 			);
-			path = ExchangeSDK;
+			path = ExchangeSdk;
 			sourceTree = "<group>";
 		};
 		B041EB44291127D400E91A84 /* Network */ = {
