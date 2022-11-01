@@ -1,5 +1,5 @@
 //
-//  ErrorDTO.swift
+//  ExchangeInchError.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin.

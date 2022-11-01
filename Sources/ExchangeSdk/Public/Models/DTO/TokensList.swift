@@ -1,5 +1,5 @@
 //
-//  InfoDTO.swift
+//  TokensList.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin.

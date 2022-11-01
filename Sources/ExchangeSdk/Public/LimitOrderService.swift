@@ -17,11 +17,11 @@ public protocol LimitOrderServiceProtocol: AnyObject {
 }
 
 class LimitOrderService: LimitOrderServiceProtocol {
-    let debugMode: Bool
-    private lazy var networkService: NetworkService = NetworkService(debugMode: debugMode)
+    let isDebug: Bool
+    private lazy var networkService: NetworkService = NetworkService(isDebug: isDebug)
     
-    init(debugMode: Bool) {
-        self.debugMode = debugMode
+    init(isDebug: Bool) {
+        self.isDebug = isDebug
     }
     
     func ordersForAddress(blockchain: ExchangeBlockchain, parameters: OrdersForAddressParameters) async -> Result<[LimitOrder], ExchangeInchError> {

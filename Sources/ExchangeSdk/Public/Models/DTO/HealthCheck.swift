@@ -1,5 +1,5 @@
 //
-//  HealthCheckDTO.swift
+//  HealthCheck.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin.

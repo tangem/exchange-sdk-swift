@@ -1,5 +1,5 @@
 //
-//  LimitOrderDTO.swift
+//  LimitOrder.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin.

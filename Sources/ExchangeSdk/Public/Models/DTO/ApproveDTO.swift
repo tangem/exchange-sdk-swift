@@ -1,5 +1,5 @@
 //
-//  ApproveSpenderDTO.swift
+//  ApproveSpender.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin.

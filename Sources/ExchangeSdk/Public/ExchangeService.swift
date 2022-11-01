@@ -37,11 +37,11 @@ public protocol ExchangeServiceProtocol: AnyObject {
 }
 
 class ExchangeService: ExchangeServiceProtocol {
-    let debugMode: Bool
-    private lazy var networkService: NetworkService = NetworkService(debugMode: debugMode)
+    let isDebug: Bool
+    private lazy var networkService: NetworkService = NetworkService(isDebug: isDebug)
     
-    init(debugMode: Bool = false) {
-        self.debugMode = debugMode
+    init(isDebug: Bool = false) {
+        self.isDebug = isDebug
     }
     
     func healthCheck(blockchain: ExchangeBlockchain) async -> Result<HealthCheck, ExchangeInchError> {

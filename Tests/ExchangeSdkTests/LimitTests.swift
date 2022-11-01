@@ -10,12 +10,10 @@ import XCTest
 @testable import ExchangeSdk
 
 final class LimitTests: XCTestCase {
-    let limit: LimitOrderServiceProtocol = ExchangeSdk.buildInchLimitService(debugMode: true)
+    let limit: LimitOrderServiceProtocol = ExchangeSdk.buildInchLimitService(isDebug: true)
     
     func testLimitForAddress() async {
         let response = await limit.ordersForAddress(blockchain: .polygon, parameters: .init(address: "0x2d45754375672e470E03beF24f4acC3cCD36973c"))
-        
-        let params = AllOrdersParameters.init(statuses: [.invalid, .temporaryInvalid])
         
         switch response {
         case .success(let objects):
