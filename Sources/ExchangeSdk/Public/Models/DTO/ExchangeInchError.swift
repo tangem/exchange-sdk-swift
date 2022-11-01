@@ -20,29 +20,16 @@ public struct InchError: Decodable, Error {
     public let error: String
     public let description: String
     public let requestId: String
-    public let meta: Meta
-    
-    public struct Meta: Decodable {
-        public let type: String
-        public let value: String
-        
-        internal init(type: String = "", value: String = "") {
-            self.type = type
-            self.value = value
-        }
-    }
     
     internal init(
         statusCode: Int,
         error: String = "",
         description: String = "",
-        requestId: String = "",
-        meta: InchError.Meta = .init()
+        requestId: String = ""
     ) {
         self.statusCode = statusCode
         self.error = error
         self.description = description
         self.requestId = requestId
-        self.meta = meta
     }
 }

@@ -88,6 +88,29 @@ final class ExchangerTests: XCTestCase {
         }
     }
     
+    func testGeneratingSwapWithErrorCannotEstimate() async {
+        let amount = 900_000_000_000_000_000
+        let parameters = SwapParameters(fromTokenAddress: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        toTokenAddress: "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+                                        amount: "\(amount)",
+                                        fromAddress: "0x2d45754375672e470E03beF24f4acC3cCD36973c",
+                                        slippage: 1)
+        
+        let response = await exchange.swap(blockchain: .polygon,
+                                           parameters: parameters)
+        switch response {
+        case .success:
+            XCTAssert(false)
+        case .failure(let error):
+            switch error {
+            case .decodeError, .serverError, .unknownError:
+                XCTAssert(false, error.localizedDescription)
+            case .parsedError(let errorInfo):
+                XCTAssert(errorInfo.description.contains("cannot estimate"))
+            }
+        }
+    }
+    
     func testApproveSpender() async {
         let spenderAddress = "0x1111111254fb6c44bac0bed2854e76f90643097d"
         let response = await exchange.spender(blockchain: .ethereum)
