@@ -10,8 +10,6 @@
 		128B7E3111ED75BC86050B3A /* Pods_ExchangeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A4CD294AAA7F9CC94D64B2 /* Pods_ExchangeSdk.framework */; };
 		B0335B92290F8EAB00F33BAF /* ExchangeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0335B89290F8EAA00F33BAF /* ExchangeSdk.framework */; };
 		B0335C0F290F8F7600F33BAF /* ExchangeSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = B0335C0E290F8F7600F33BAF /* ExchangeSdk.h */; };
-		B041EB40291126FF00E91A84 /* ExchangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB3E291126FF00E91A84 /* ExchangerTests.swift */; };
-		B041EB41291126FF00E91A84 /* LimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB3F291126FF00E91A84 /* LimitTests.swift */; };
 		B041EB67291127D500E91A84 /* ExchangeSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB43291127D400E91A84 /* ExchangeSdk.swift */; };
 		B041EB68291127D500E91A84 /* ExchangeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB45291127D400E91A84 /* ExchangeNetworkService.swift */; };
 		B041EB69291127D500E91A84 /* AsyncMoyaRequestWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB46291127D400E91A84 /* AsyncMoyaRequestWrapper.swift */; };
@@ -38,6 +36,8 @@
 		B041EB7E291127D500E91A84 /* InfoTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB64291127D400E91A84 /* InfoTarget.swift */; };
 		B041EB7F291127D500E91A84 /* ApproveTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB65291127D400E91A84 /* ApproveTarget.swift */; };
 		B041EB80291127D500E91A84 /* SwapTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB66291127D400E91A84 /* SwapTarget.swift */; };
+		B041EB842911329200E91A84 /* ExchangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB822911329200E91A84 /* ExchangerTests.swift */; };
+		B041EB852911329200E91A84 /* LimitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041EB832911329200E91A84 /* LimitTests.swift */; };
 		EFBB41D8BFA988AABC11902D /* Pods_ExchangeSdk_ExchangeSdkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26DD0ADDA253E205983DACE /* Pods_ExchangeSdk_ExchangeSdkTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,8 +59,6 @@
 		B0335B89290F8EAA00F33BAF /* ExchangeSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExchangeSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0335B91290F8EAB00F33BAF /* ExchangeSdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExchangeSdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0335C0E290F8F7600F33BAF /* ExchangeSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeSdk.h; sourceTree = "<group>"; };
-		B041EB3E291126FF00E91A84 /* ExchangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExchangerTests.swift; path = Tests/ExchangeSdkTests/ExchangerTests.swift; sourceTree = SOURCE_ROOT; };
-		B041EB3F291126FF00E91A84 /* LimitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LimitTests.swift; path = Tests/ExchangeSdkTests/LimitTests.swift; sourceTree = SOURCE_ROOT; };
 		B041EB43291127D400E91A84 /* ExchangeSdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeSdk.swift; sourceTree = "<group>"; };
 		B041EB45291127D400E91A84 /* ExchangeNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeNetworkService.swift; sourceTree = "<group>"; };
 		B041EB46291127D400E91A84 /* AsyncMoyaRequestWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncMoyaRequestWrapper.swift; sourceTree = "<group>"; };
@@ -87,6 +85,8 @@
 		B041EB64291127D400E91A84 /* InfoTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTarget.swift; sourceTree = "<group>"; };
 		B041EB65291127D400E91A84 /* ApproveTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApproveTarget.swift; sourceTree = "<group>"; };
 		B041EB66291127D400E91A84 /* SwapTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwapTarget.swift; sourceTree = "<group>"; };
+		B041EB822911329200E91A84 /* ExchangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangerTests.swift; sourceTree = "<group>"; };
+		B041EB832911329200E91A84 /* LimitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitTests.swift; sourceTree = "<group>"; };
 		B26DD0ADDA253E205983DACE /* Pods_ExchangeSdk_ExchangeSdkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExchangeSdk_ExchangeSdkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6865726C6E646858CAC1A42 /* Pods-ExchangeSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExchangeSdk.release.xcconfig"; path = "Target Support Files/Pods-ExchangeSdk/Pods-ExchangeSdk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				B0335BD5290F8F3900F33BAF /* Sources */,
-				B0335C0B290F8F4800F33BAF /* ExchangeSdkTests */,
+				B041EB812911329200E91A84 /* ExchangeSdkTests */,
 				B0335B8A290F8EAA00F33BAF /* Products */,
 				8F7F63F162B2EBBE36180BAC /* Pods */,
 				331BEE9BC25595AF7D01A2EE /* Frameworks */,
@@ -159,15 +159,6 @@
 				B0335C0E290F8F7600F33BAF /* ExchangeSdk.h */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		B0335C0B290F8F4800F33BAF /* ExchangeSdkTests */ = {
-			isa = PBXGroup;
-			children = (
-				B041EB3E291126FF00E91A84 /* ExchangerTests.swift */,
-				B041EB3F291126FF00E91A84 /* LimitTests.swift */,
-			);
-			path = ExchangeSdkTests;
 			sourceTree = "<group>";
 		};
 		B041EB42291127D400E91A84 /* ExchangeSDK */ = {
@@ -281,6 +272,15 @@
 				B041EB66291127D400E91A84 /* SwapTarget.swift */,
 			);
 			path = ExchangeTargets;
+			sourceTree = "<group>";
+		};
+		B041EB812911329200E91A84 /* ExchangeSdkTests */ = {
+			isa = PBXGroup;
+			children = (
+				B041EB822911329200E91A84 /* ExchangerTests.swift */,
+				B041EB832911329200E91A84 /* LimitTests.swift */,
+			);
+			path = ExchangeSdkTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,8 +493,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B041EB40291126FF00E91A84 /* ExchangerTests.swift in Sources */,
-				B041EB41291126FF00E91A84 /* LimitTests.swift in Sources */,
+				B041EB842911329200E91A84 /* ExchangerTests.swift in Sources */,
+				B041EB852911329200E91A84 /* LimitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
