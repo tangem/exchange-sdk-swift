@@ -7,11 +7,11 @@
 //
 
 public struct ExchangeSdk {
-    public static func buildInchExchangeService(isDebug: Bool) -> ExchangeServiceProtocol {
+    public static func buildOneInchExchangeService(isDebug: Bool) -> ExchangeServiceProtocol {
         return ExchangeService(isDebug: isDebug)
     }
     
-    public static func buildInchLimitService(isDebug: Bool) -> LimitOrderServiceProtocol {
+    public static func buildOneInchLimitService(isDebug: Bool) -> LimitOrderServiceProtocol {
         return LimitOrderService(isDebug: isDebug)
     }
 }

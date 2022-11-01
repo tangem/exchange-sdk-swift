@@ -10,7 +10,7 @@ import XCTest
 @testable import ExchangeSdk
 
 final class ExchangerTests: XCTestCase {
-    let exchange: ExchangeServiceProtocol = ExchangeSdk.buildInchExchangeService(isDebug: true)
+    let exchange: ExchangeServiceProtocol = ExchangeSdk.buildOneInchExchangeService(isDebug: true)
     
     func testHealth() async {
         let health = await exchange.healthCheck(blockchain: .bsc)
