@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 class NetworkService {
-    let debugMode: Bool
+    let isDebug: Bool
     
     // MARK: - Private variable
     
@@ -22,8 +22,8 @@ class NetworkService {
     
     private let provider = MoyaProvider<BaseTarget>()
     
-    init(debugMode: Bool) {
-        self.debugMode = debugMode
+    init(isDebug: Bool) {
+        self.isDebug = isDebug
     }
     
     // MARK: - Internal methods
@@ -35,12 +35,13 @@ class NetworkService {
             return self.provider.request(target) { result in
                 switch result {
                 case .success(let response):
-                    if self.debugMode {
+                    if self.isDebug {
                         print("URL REQUEST -> \(response.request?.url?.absoluteString ?? "")")
-                        self.responseDecoding(data: response.data, decodeTo: T.self)
                     }
                     
                     if let response = try? response.filterSuccessfulStatusCodes() {
+                        self.logIfNeeded(data: response.data)
+                        
                         do {
                             let object = try self.jsonDecoder.decode(T.self, from: response.data)
                             continuation.resume(returning: .success(object))
@@ -50,14 +51,18 @@ class NetworkService {
                     } else {
                         do {
                             let errorObject = try self.jsonDecoder.decode(InchError.self, from: response.data)
+                            self.logIfNeeded(data: response.data)
                             continuation.resume(returning: .failure(.parsedError(withInfo: errorObject)))
                         } catch {
+                            if self.isDebug {
+                                print("Error -> \(error.localizedDescription)")
+                            }
                             continuation.resume(returning: .failure(.unknownError(statusCode: response.statusCode)))
                         }
                     }
                 case .failure(let error):
-                    if self.debugMode {
-                        print("URL REQUEST -> \(error.response?.request?.url?.absoluteString ?? "")")
+                    if self.isDebug {
+                        print("Error -> \(error.localizedDescription)")
                     }
                     continuation.resume(returning: .failure(.serverError(withError: error)))
                 }
@@ -75,20 +80,15 @@ class NetworkService {
     
     // MARK: - Private
     
-    private func responseDecoding<T: Decodable>(data: Data, decodeTo: T.Type) {
-        do {
-            let decodeJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-            let dataJSON = try JSONSerialization.data(withJSONObject: decodeJSON, options: .prettyPrinted)
-            print(String(decoding: dataJSON, as: UTF8.self))
-        } catch {
-            print("Decoding response error -> \(error)")
-        }
-        
-        do {
-            _ = try jsonDecoder.decode(decodeTo, from: data)
-            print("Decode to object success")
-        } catch {
-            print("Decode to object error -> \(error)")
+    private func logIfNeeded(data: Data) {
+        if isDebug {
+            do {
+                let decodeJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                let dataJSON = try JSONSerialization.data(withJSONObject: decodeJSON, options: .prettyPrinted)
+                print(String(decoding: dataJSON, as: UTF8.self))
+            } catch {
+                print("Decoding response error -> \(error)")
+            }
         }
     }
 }
