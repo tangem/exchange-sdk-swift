@@ -3,11 +3,11 @@
 Network layer for 1inch router.
 
 ```swift
-let exchangeFacade: ExchangeServiceProtocol = ExchangeSdk.buildInchExchangeService(debugMode: true)
+let exchangeService: ExchangeServiceProtocol = ExchangeSdk.buildOneInchExchangeService(debugMode: true)
 
-// Get tokens info
+// Get tokens list
 Task { 
-    let tokens = await exchangeFacade.tokens(blockchain: .polygon)
+    let tokens = await exchangeService.tokens(blockchain: .polygon)
     switch tokens {
     case .success(let tokensDTO):
         dto.tokens.forEach {
@@ -25,7 +25,7 @@ Task {
     let toAddress = "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063"
     let walletAddress = "0x**..." //Your wallet address
     
-    let response = await exchange.swap(blockchain: .polygon,
+    let response = await exchangeService.swap(blockchain: .polygon,
                                        parameters: SwapParameters(fromTokenAddress: fromAddress,
                                                                   toTokenAddress: toAddress,
                                                                   amount: "\(amount)",
