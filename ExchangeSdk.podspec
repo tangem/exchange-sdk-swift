@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = "ExchangeSdk"
-    s.version = "1.0.1"
+    s.version = "1.0.2"
     s.summary = "API wrapper for 1inch service"
     s.homepage = 'https://github.com/tangem/exchange-sdk-swift'
     s.description  = "Use ExchangeSDK for simple integration 1inch swap router"
